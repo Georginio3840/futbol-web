@@ -7,8 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
-
 public class ArbitroDTO {
     private Long id;
     private String nombre;
