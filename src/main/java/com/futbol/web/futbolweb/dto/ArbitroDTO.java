@@ -1,10 +1,13 @@
 package com.futbol.web.futbolweb.dto;
 
-public class ArbitroDTO {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class ArbitroDTO extends NuevoArbitroDTO {
     private Long id;
-    private String nombre;
-    private String apellido;
-    private String cedula;
-    private String licencia;
-    private String telefono;
+   
 }

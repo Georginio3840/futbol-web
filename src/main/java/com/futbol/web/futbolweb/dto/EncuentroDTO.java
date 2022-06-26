@@ -1,9 +1,15 @@
 package com.futbol.web.futbolweb.dto;
 
-public class EncuentroDTO {
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+
+public class EncuentroDTO extends NuevoEncuentroDTO {
     
     private Long id;
-    private Integer marcador;
-    private String fecha;
-    private String hora;
+    
 }
