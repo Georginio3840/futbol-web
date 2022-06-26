@@ -9,9 +9,9 @@ import com.futbol.web.futbolweb.dto.NuevoArbitroDTO;
 public interface ArbitroService {
  
     public ArbitroDTO create (NuevoArbitroDTO arbitroDTO);
-    public ArbitroDTO retrieve (Long id) throws Exception;
-    public ArbitroDTO update(ArbitroDTO arbitroDTO) throws Exception;
-    public void delete(Long id) throws Exception;
+    public ArbitroDTO retrieve (Long id);
+    public ArbitroDTO update(ArbitroDTO arbitroDTO, Long id);
+    public void delete(Long id);
 
     public List<ArbitroDTO> list();
 

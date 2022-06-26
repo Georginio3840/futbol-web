@@ -6,10 +6,10 @@ import com.futbol.web.futbolweb.dto.EquipoDTO;
 import com.futbol.web.futbolweb.dto.NuevoEquipoDTO;
 
 public interface EquipoService {
-    public EquipoService create (NuevoEquipoDTO equipoDTO);
-    public EquipoService retrive (long id) throws Exception;
-    public EquipoService update(EquipoDTO equipoDTO) throws Exception;
-    public void delete(Long id) throws Exception;
+    public EquipoDTO create (NuevoEquipoDTO equipoDTO);
+    public EquipoDTO retrieve (Long id);
+    public EquipoDTO update(EquipoDTO equipoDTO, Long id);
+    public void delete(Long id);
 
     public List<EquipoDTO> list();
     

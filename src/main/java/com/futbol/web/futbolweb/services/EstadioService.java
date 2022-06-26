@@ -7,10 +7,10 @@ import com.futbol.web.futbolweb.dto.NuevoEstadioDTO;
 
 public interface EstadioService {
     
-    public EstadioService create (NuevoEstadioDTO estadioDTODTO);
-    public EstadioService retrive (long id) throws Exception;
-    public EstadioService update(EstadioDTO encuentroDTO) throws Exception;
-    public void delete(Long id) throws Exception;
+    public EstadioDTO create (NuevoEstadioDTO estadioDTODTO);
+    public EstadioDTO retrieve (Long id);
+    public EstadioDTO update(EstadioDTO encuentroDTO, Long id);
+    public void delete(Long id);
 
     public List<EstadioDTO> list();
 }

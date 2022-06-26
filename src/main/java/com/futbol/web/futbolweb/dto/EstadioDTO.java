@@ -8,11 +8,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class EstadioDTO {
+public class EstadioDTO extends NuevoEstadioDTO {
 
     private Long id;
-    private String nombre;
-    private String ubicacion;
-    private Integer capacidad;
     
 }

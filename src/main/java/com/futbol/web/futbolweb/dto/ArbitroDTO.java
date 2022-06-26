@@ -7,11 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ArbitroDTO {
+public class ArbitroDTO extends NuevoArbitroDTO {
     private Long id;
-    private String nombre;
-    private String apellido;
-    private String cedula;
-    private String licencia;
-    private String telefono;
+   
 }

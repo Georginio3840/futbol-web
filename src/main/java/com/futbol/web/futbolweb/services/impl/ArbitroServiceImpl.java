@@ -1,11 +1,11 @@
 package com.futbol.web.futbolweb.services.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.futbol.web.futbolweb.dto.ArbitroDTO;
 import com.futbol.web.futbolweb.dto.NuevoArbitroDTO;
+import com.futbol.web.futbolweb.exceptions.ResourceNotFoundException;
 import com.futbol.web.futbolweb.models.Arbitro;
 import com.futbol.web.futbolweb.repositories.ArbitroRepository;
 import com.futbol.web.futbolweb.services.ArbitroService;
@@ -32,50 +32,46 @@ public class ArbitroServiceImpl implements ArbitroService {
     public ArbitroDTO create(NuevoArbitroDTO arbitroDTO) {
         Arbitro arbitro = modelMapper.map(arbitroDTO, Arbitro.class);
         arbitroRepository.save(arbitro);
-        ArbitroDTO arbitroDTOCreated = modelMapper.map(arbitro, ArbitroDTO.class); 
-        return arbitroDTOCreated;
+        return modelMapper.map(arbitro, ArbitroDTO.class);
     }
 
     //Consultar
     @Override
     @Transactional(readOnly = true)
-    public ArbitroDTO retrieve(Long id) throws Exception {
-        Optional<Arbitro> arbitro = arbitroRepository.findById(id);
-        if(arbitro.isEmpty()){
-            throw new Exception("Exan not found");
-        }
-        //.orElseThrow(()-> new Exception("Exam not found"));
+    public ArbitroDTO retrieve(Long id){
+        Arbitro arbitro = arbitroRepository.findById(id)
+        .orElseThrow(()-> new ResourceNotFoundException("Arbitro not found"));
         return modelMapper.map(arbitro, ArbitroDTO.class);
     }
 
     //Actualizar
     @Override
     @Transactional
-    public ArbitroDTO update(ArbitroDTO arbitroDTO) throws Exception {
-        Arbitro arbitro = arbitroRepository.findById(arbitroDTO.getId())
-                .orElseThrow(()-> new Exception("Exam not found"));
-        
+    public ArbitroDTO update(ArbitroDTO arbitroDTO, Long id) {
+        Arbitro arbitro = arbitroRepository.findById(id)
+        .orElseThrow(()-> new ResourceNotFoundException("Arbitro not found"));
+        arbitro.setId(id);
         arbitro = modelMapper.map(arbitroDTO, Arbitro.class);
-        arbitroRepository.save(arbitro);       
-
+        arbitroRepository.save(arbitro);
         return modelMapper.map(arbitro, ArbitroDTO.class);
     }
     //eliminar
     @Override
     @Transactional
-    public void delete(Long id) throws Exception {
+    public void delete(Long id){ 
         Arbitro arbitro = arbitroRepository.findById(id)
-                .orElseThrow(()-> new Exception("Exam not found"));        
-        arbitroRepository.deleteById(arbitro.getId());      
-        
-        
+        .orElseThrow(()-> new ResourceNotFoundException("Arbitro not found"));
+
+        arbitroRepository.deleteById(arbitro.getId());        
     }
     @Override
     @Transactional(readOnly = true)
     public List<ArbitroDTO> list() {
+
         List<Arbitro> arbitros = arbitroRepository.findAll();
         return arbitros.stream().map(arbitro -> modelMapper.map(arbitro, ArbitroDTO.class))
-            .collect(Collectors.toList());        
+        .collect(Collectors.toList());
+                  
     }
 
 

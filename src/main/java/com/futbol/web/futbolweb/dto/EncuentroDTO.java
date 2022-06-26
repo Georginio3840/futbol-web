@@ -8,10 +8,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class EncuentroDTO {
+public class EncuentroDTO extends NuevoEncuentroDTO {
     
     private Long id;
-    private Integer marcador;
-    private String fecha;
-    private String hora;
+    
 }

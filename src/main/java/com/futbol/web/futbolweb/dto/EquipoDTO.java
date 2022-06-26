@@ -8,10 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class EquipoDTO {
+public class EquipoDTO extends NuevoEquipoDTO{
     private Long id;
-    private String nombre;
-    private String uniforme;
-    private String tecnico;
     
 }

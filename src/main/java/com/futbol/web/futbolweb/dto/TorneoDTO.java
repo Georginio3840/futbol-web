@@ -8,12 +8,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-public class TorneoDTO {
+public class TorneoDTO extends NuevoTorneoDTO {
 
     private Long id;
-    private String nombre;
-    private String fecha_inicio;
-    private String fecha_fin;
 
     
 }
