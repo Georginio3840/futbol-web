@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.futbol.web.futbolweb.dto.NuevoTorneoDTO;
 import com.futbol.web.futbolweb.dto.TorneoDTO;
+import com.futbol.web.futbolweb.dto.TorneoListDTO;
 
 public interface TorneoService {
     
@@ -11,6 +12,7 @@ public interface TorneoService {
     public TorneoDTO retrieve (Long id);
     public TorneoDTO update(TorneoDTO torneoDTO,Long id);
     public void delete(Long id);
+    public long count();
 
-    public List<TorneoDTO> list();
+    public List<TorneoListDTO> list(int page, int size, String sort);
 }

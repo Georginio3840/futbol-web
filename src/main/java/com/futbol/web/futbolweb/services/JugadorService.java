@@ -7,11 +7,7 @@ import com.futbol.web.futbolweb.dto.NuevoJugadorDTO;
 
 public interface JugadorService {
     
-    public JugadorDTO create (NuevoJugadorDTO jugadorDTO);
-    public JugadorDTO retrieve (long id);
-    public JugadorDTO update(JugadorDTO jugadorDTO, Long id);
-    public void delete(Long id);
-
-    public List<JugadorDTO> list();
-
+    public List<JugadorDTO> create (Long idTorneo, Long idEncuentro, Long idEquipo, List<NuevoJugadorDTO> list);
+    public List<JugadorDTO> list(Long idTorneo, Long idEncuentro, Long idEquipo);
+    public void remove(Long idTorneo, Long idEncuentro, Long idEquipo);
 }

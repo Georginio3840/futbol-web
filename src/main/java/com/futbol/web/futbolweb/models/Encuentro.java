@@ -1,6 +1,8 @@
 package com.futbol.web.futbolweb.models;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -36,17 +39,16 @@ public class Encuentro {
     @JoinColumn(name="TORNEO_ID", nullable=false)
     private Torneo torneo;
 
-    @ManyToOne
-    @JoinColumn(name="ESTADIO_ID", nullable=false)
-    private Estadio estadio;
+    //@ManyToOne
+    //@JoinColumn(name="ESTADIO_ID", nullable=false)
+    //private Estadio estadio;
 
-    @ManyToOne
-    @JoinColumn(name = "ARBITRO_ID", nullable = false)
-    private Arbitro arbitro;
+    //@ManyToOne
+    //@JoinColumn(name = "ARBITRO_ID", nullable = false)
+    //private Arbitro arbitro;
 
-    @ManyToOne
-    @JoinColumn(name = "EQUIPO_ID", nullable = false)
-    private Equipo equipo;
+    @OneToMany(mappedBy = "encuentro")
+    private List<Equipo> equipos;
     
     
 }

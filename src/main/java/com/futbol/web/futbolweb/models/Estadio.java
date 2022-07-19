@@ -33,7 +33,7 @@ public class Estadio {
     @Column(name = "CAPACIDAD")
     private Integer capacidad;
     
-    @OneToMany(mappedBy="estadio")
-    private List<Encuentro> encuentros;
+    //@OneToMany(mappedBy="estadio")
+    //private List<Encuentro> encuentros;
             
 }

@@ -9,8 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class TorneoDTO extends NuevoTorneoDTO {
-
-    private Long id;
-
-    
+    private Long id;    
 }

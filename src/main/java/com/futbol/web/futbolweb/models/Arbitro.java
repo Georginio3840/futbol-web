@@ -41,8 +41,8 @@ public class Arbitro {
     @Column(name = "DESCRIPCION")
     private String descripcion;
 
-    @OneToMany(mappedBy="arbitro")
-    private List<Encuentro> encuentros;
+    //@OneToMany(mappedBy="arbitro")
+    //private List<Encuentro> encuentros;
 
     
 }

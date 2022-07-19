@@ -4,12 +4,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.futbol.web.futbolweb.dto.NuevoTorneoDTO;
 import com.futbol.web.futbolweb.dto.TorneoDTO;
+import com.futbol.web.futbolweb.dto.TorneoListDTO;
+import com.futbol.web.futbolweb.exceptions.NoContentException;
 import com.futbol.web.futbolweb.exceptions.ResourceNotFoundException;
 import com.futbol.web.futbolweb.models.Torneo;
 import com.futbol.web.futbolweb.repositories.TorneoRepository;
@@ -21,8 +26,8 @@ public class TorneoServiceImpl implements TorneoService {
     final ModelMapper modelMapper;
     final TorneoRepository torneoRepository;
 
-    @Autowired
-    public TorneoServiceImpl(@Autowired TorneoRepository repository, ModelMapper mapper){
+    
+    public TorneoServiceImpl(TorneoRepository repository, ModelMapper mapper){
 
         this.torneoRepository=repository;
         this.modelMapper=mapper;
@@ -70,10 +75,20 @@ public class TorneoServiceImpl implements TorneoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<TorneoDTO> list() {
-        List<Torneo> torneos = torneoRepository.findAll();
-        return torneos.stream().map(torneo -> modelMapper.map(torneo, TorneoDTO.class))
-        .collect(Collectors.toList());
+    public List<TorneoListDTO> list(int page, int size, String sort) {
+        Pageable pageable = sort == null || sort.isEmpty() ? 
+                    PageRequest.of(page, size) 
+                :   PageRequest.of(page, size,  Sort.by(sort));
+
+        Page<Torneo> torneos = torneoRepository.findAll(pageable);
+        if(torneos.isEmpty()) throw new NoContentException("Torneo is empty");
+        return torneos.stream().map(torneo -> modelMapper.map(torneo, TorneoListDTO.class))
+            .collect(Collectors.toList());  
+    }
+
+    @Override
+    public long count() {        
+        return torneoRepository.count();
     }
 
 }

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,8 +37,9 @@ public class Equipo {
     @OneToMany(mappedBy = "equipo")
     private List<Jugador> jugadores;
 
-    @OneToMany(mappedBy = "equipo")
-    private List<Encuentro> encuentros;
+    @ManyToOne
+    @JoinColumn(name = "ENCUENTRO_ID", nullable = false)
+    private Encuentro encuentro;
 
     
     

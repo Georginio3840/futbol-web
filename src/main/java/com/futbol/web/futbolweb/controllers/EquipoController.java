@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import com.futbol.web.futbolweb.dto.NuevoEquipoDTO;
 import com.futbol.web.futbolweb.services.EquipoService;
 
 @RestController
-@RequestMapping("/equipos")
+@RequestMapping("/torneos")
 public class EquipoController {
 
     private final EquipoService service;
@@ -32,34 +31,26 @@ public class EquipoController {
         this.service =srv;
     }
 
-    @PostMapping()
-    public ResponseEntity<EquipoDTO> create(@Valid @RequestBody NuevoEquipoDTO equipoDTO){
-        EquipoDTO result = service.create(equipoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);        
+    /* ================ CREATE ================ */
+    @PostMapping("/{id}/encuentro/{idEncuentro}/equipos")
+    public ResponseEntity<List<EquipoDTO>> create(@PathVariable("id") Long id, @PathVariable("idEncuentro") Long idEncuentro, @Valid @RequestBody List<NuevoEquipoDTO> equiposDTO){
+        List<EquipoDTO> result = service.create(id, idEncuentro, equiposDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);      
     }
     
-    @GetMapping("/{id}")
-    public ResponseEntity<EquipoDTO> retrive(@PathVariable("id") Long id){
-        EquipoDTO result = service.retrieve(id);
-        return ResponseEntity.ok().body(result);        
-    }
 
-    @GetMapping() //el verbo es diferente a create ya que va
-    public ResponseEntity<List<EquipoDTO>> list(){
-        List<EquipoDTO> result  = service.list();
-        return ResponseEntity.ok().body(result);        
+    /* ================ DELETE ================ */
+    @DeleteMapping("/{id}/encuentro/{idEncuentro}/equipos")
+    public ResponseEntity<List<EquipoDTO>> delete(@PathVariable("id") Long id, @PathVariable("idEncuentro") Long idEncuentro){
+        service.remove(id, idEncuentro);
+        return ResponseEntity.noContent().build();      
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<EquipoDTO> update(@RequestBody EquipoDTO equipoDTO, @PathVariable("id") Long id){
-        EquipoDTO result = service.update(equipoDTO, id);
-        return ResponseEntity.ok().body(result);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id){
-        service.delete(id);
-        return ResponseEntity.ok().body("Equipo deleted!");        
+    
+    /* ================ LIST ================ */
+    @GetMapping("/{id}/encuentro/{idEncuentro}/equipos") 
+    public ResponseEntity<List<EquipoDTO>> list(@PathVariable("id") Long id, @PathVariable("idEncuentro") Long idEncuentro){
+        List<EquipoDTO> result  = service.list(id, idEncuentro);
+        return ResponseEntity.status(HttpStatus.OK).body(result);        
     }
     
 }
